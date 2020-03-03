@@ -1,0 +1,64 @@
+﻿
+@{
+    ViewBag.Title = "View";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@using System.Linq
+@using VideoGames.Models
+<h2 class="text-center">Shopping Cart</h2>
+
+@*<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Cart</title>
+</head>*@
+<div class="jumbotron text-center">
+    <body>
+        @if (Session["cart"] == null)
+        {
+            <h1>No items in cart</h1>
+        }
+        else
+        {
+            @*<h3>Cart Page</h3>*@
+            <table class="table table-borderless" cellpadding="2" cellspacing="2" border="1">
+                <tr>
+                    <th>Option</th>
+                    @*<th>Id</th>*@
+                    <th>Name</th>
+                    <th>Photo</th>
+                    <th>Price</th>
+                    <th>Quantity</th>
+                    <th>Sub Total</th>
+                </tr>
+
+                @foreach (Item item in (List<Item>)Session["cart"])
+                {
+                    <tr>
+                        <td><a class="btn btn-warning" href="@Url.Action("Remove", "Cart", new { id = item.VideoGame.Id })">Remove</a></td>
+                        @*<td>@item.VideoGame.Id</td>*@
+                        <td>@item.VideoGame.Name</td>
+                        <td><img src="@item.VideoGame.Image" width="100" /> </td>
+                        <td>@item.VideoGame.Price$</td>
+                        <td>@item.Quantity</td>
+                        <td>@(item.VideoGame.Price * item.Quantity)$</td>
+                    </tr>
+                }
+                <tr>
+                    <td align="right" colspan="5">Sum</td>
+                    <td>
+                        @{
+                            List<Item> cart = (List<Item>)Session["cart"];
+                            var total = cart.Sum(item => item.VideoGame.Price * item.Quantity);
+                        }
+                        @total$
+                    </td>
+                </tr>
+            </table>
+        }
+        <br>
+        <a class="btn btn-primary" href="@Url.Action("Index", "VideoGames")">Continue Shopping</a>
+
+    </body>
+</div>
+@*</html>*@

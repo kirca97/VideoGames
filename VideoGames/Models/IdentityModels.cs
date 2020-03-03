@@ -29,5 +29,7 @@ namespace VideoGames.Models
         {
             return new ApplicationDbContext();
         }
+
+        public System.Data.Entity.DbSet<VideoGames.Models.VideoGame> VideoGames { get; set; }
     }
 }

@@ -52,6 +52,29 @@ namespace VideoGames.Controllers
             }
         }
 
+        public ActionResult AddUserToRole(string returnUrl)
+        {
+            var model = new AddToRoleModel();
+            model.roles.Add("Admin");
+            model.roles.Add("User");
+            return View(model);
+        }
+
+        [HttpPost]
+        public ActionResult AddUserToRole(AddToRoleModel model)
+        {
+            try
+            {
+                var user = UserManager.FindByEmail(model.Email);
+                UserManager.AddToRole(user.Id, model.selectedRole);
+                return RedirectToAction("Index", "Home");
+            }
+            catch (Exception ex)
+            {
+                return HttpNotFound();
+            }
+        }
+
         //
         // GET: /Account/Login
         [AllowAnonymous]

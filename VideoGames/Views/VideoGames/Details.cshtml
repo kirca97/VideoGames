@@ -1,0 +1,71 @@
+﻿@model VideoGames.Models.VideoGame
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>VideoGame</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Creator)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Creator)
+        </dd>
+
+        @*<dt>
+            @Html.DisplayNameFor(model => model.Image)
+        </dt>*@
+
+        @*<dd>
+            <img style="width:400px; height:200px" src="@Model.Image" />
+        </dd>*@
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Price)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Price)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ReleasedYear)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ReleasedYear)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Rating)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Rating)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @if (User.IsInRole("Admin"))
+    {
+        @Html.ActionLink("Edit", "Edit", new { id = Model.Id })
+    }
+    <a href="@Url.Action("Index", "VideoGames")" class="btn btn-info">Back to List</a>
+    @*@Html.ActionLink("Back to List", "Index")*@
+</p>
